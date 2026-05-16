@@ -14,14 +14,9 @@
   <main class="deck">
 
     <section class="slide cover">
-      <div class="frame">
-        <div class="stack" style="align-content:center;gap:2.4vh">
-          <div class="eyebrow">最近の活動紹介 / 15分発表</div>
-          <h1>だんご<br>バス3台</h1>
-          <p class="subtitle">団子運転を、シミュレーション・現場制約・複数分野の視点から考える</p>
-          <div class="tag-row"><span class="tag">自作HTMLシミュレーター</span><span class="tag">スプリング制御</span><span class="tag">NEC REFLEX</span><span class="tag">EV時代の運行設計</span></div>
-        </div>
-        <div class="image-card" style="background:#ffd91b;box-shadow:0 30px 70px rgba(180,130,0,.20)"><img src="assets/images/dango_bus_3.png" alt="だんごバス3台のイラスト"></div>
+      <div class="frame cover-frame">
+        <div class="image-card cover-image"><img src="assets/images/dango_bus_3.png" alt="だんごバス3台のイラスト"></div>
+        <p class="subtitle cover-subtitle">団子運転をシミュレーションから考える</p>
       </div>
       <div class="slide-no"></div>
       <aside class="notes"><b>導入：</b>だんご3兄弟のパロディとして軽く入る。身近な「バスが3台連続で来る」体験から、シミュレーション、制御、現場制約、EV時代の運行設計まで広げる。</aside>
@@ -63,25 +58,17 @@
     </section>
 
     <section class="slide terada">
-      <div class="frame two-col wide-left">
+      <div class="frame terada-frame">
         <div class="card stack quote-card">
-          <span class="eyebrow">100年前の洞察</span>
+          <span class="eyebrow">100年前の小話</span>
           <h2>寺田寅彦は、<br>すでに「混雑の波」を見ていた</h2>
-          <p>1922年の随筆『電車の混雑について』では、混雑した電車と空いた電車が周期的に現れること、そして乗客がそれを観察して行動を変え得ることが描かれている。</p>
-          <div class="success">これは後半で出てくる「混雑情報を見て、乗客が自発的に分散する」という発想の伏線になる。</div>
-        </div>
-        <div class="card stack">
-          <h3>今回のテーマとのつながり</h3>
-          <div class="final-list">
-            <div class="final-item"><div class="num">1</div><p>混雑はランダムではなく、波として現れることがある。</p></div>
-            <div class="final-item"><div class="num">2</div><p>人の行動は、混雑の波を強めることも弱めることもある。</p></div>
-            <div class="final-item"><div class="num">3</div><p>だから団子運転は、車両だけでなく乗客も含むシステム問題として見る必要がある。</p></div>
-          </div>
+          <p>物理学者・寺田寅彦は、1922年の随筆『電車の混雑について』で、混雑した電車と空いた電車が周期的に現れる様子を観察している。</p>
+          <p>今の言葉で言えば、公共交通の混雑を「偶然のばらつき」ではなく、時間とともに形を変える現象として見ていた。</p>
           <p class="source-inline">出典：寺田寅彦『電車の混雑について』初出「思想」1922年9月。</p>
         </div>
       </div>
       <div class="slide-no"></div>
-      <aside class="notes"><b>話すこと：</b>寺田寅彦を入れることで、単なる最新技術話ではなく「昔から鋭く観察されていた現象を、現代のデータとシミュレーションで扱う」という厚みを出す。</aside>
+      <aside class="notes"><b>話すこと：</b>ここでは「100年前に既に団子運転に近い現象を指摘していた物理学者がいた」という小話として軽く触れる。テーマとのつながりは、後半の乗客行動のスライドで改めて回収する。</aside>
     </section>
 
     <section class="slide">
@@ -122,17 +109,24 @@
       <aside class="notes"><b>話すこと：</b>スキップは「乗せない」ではなく「後続に任せる」。スプリング法は車間均等化の考え方。ただし次のスライドで「それだけでは不十分」と展開する。</aside>
     </section>
 
-    <section class="slide">
+    <section class="slide spring-discovery">
       <div class="frame stack" style="grid-template-rows:auto 1fr auto">
         <div>
-          <span class="eyebrow">ドラマ部分</span>
+          <span class="eyebrow">逆効果の発見</span>
           <h2 style="margin-top:1vh">スプリング法は有望。でも、ある条件で逆効果が見えた</h2>
         </div>
-        <div class="timeline drama-timeline">
-          <div class="step"><b>① 発見</b><p>シミュレーションで、高需要時にスプリング制御が思ったほど効かない、または悪化するケースを確認。</p></div>
-          <div class="step"><b>② 原因検討</b><p>AIと一緒に原因を分解。車間だけを見て満車バスを保持すると、車内客と後続に副作用が出るのでは？と仮説化。</p></div>
-          <div class="step"><b>③ 論文発見</b><p>車両容量を考慮したリアルタイム保持制御の研究にたどり着く。問題意識が先行研究とつながった。</p></div>
-          <div class="step"><b>④ 検証・克服</b><p>満員時の保持禁止を入れて再実験。高需要時の逆効果を抑えられる方向が見えた。</p></div>
+        <div class="discovery-grid">
+          <div class="timeline drama-timeline compact">
+            <div class="step"><b>① 発見</b><p>高需要時に、スプリング制御が思ったほど効かない、または悪化するケースを確認。</p></div>
+            <div class="step"><b>② 原因検討</b><p>車間だけを見て満車バスを保持すると、車内客と後続に副作用が出るのではないかと仮説化。</p></div>
+            <div class="step"><b>③ 論文発見</b><p>車両容量を考慮したリアルタイム保持制御の研究にたどり着く。</p></div>
+            <div class="step"><b>④ 検証</b><p>満員時の保持禁止を入れて再実験し、高需要時の副作用を抑える方向を確認。</p></div>
+          </div>
+          <div class="card tight stack chart-card">
+            <h3>保持禁止なし</h3>
+            <div class="image-card" style="height:43vh;box-shadow:none;border:1px solid #e6ebf4"><img src="assets/images/demand_wait_no_full_hold_ban.png" alt="満員時保持禁止なしの需要倍率別平均待ち時間"></div>
+            <p class="small">高需要側で、平均待ち時間が悪化する条件が見える。</p>
+          </div>
         </div>
         <div class="callout"><p>ポイント：制御ロジックは「車間」だけでなく、「そのバスを今止める意味があるか」まで見ないと危ない。</p></div>
       </div>
@@ -266,19 +260,19 @@
       <aside class="notes"><b>説明：</b>終盤のまとめ図。交通工学・制御工学・OR・データサイエンス・経済学・行動科学・都市計画・公共政策・環境工学・人的要因・公平性・情報システムが相互に関係することを見せる。</aside>
     </section>
 
-    <section class="slide">
-      <div class="frame two-col wide-right">
-        <div class="stack">
+    <section class="slide conclusion">
+      <div class="frame stack" style="grid-template-rows:auto 1fr">
+        <div>
           <span class="eyebrow">結論</span>
           <h2>今回の探求から<br>見えたこと</h2>
-          <div class="final-list">
-            <div class="final-item"><div class="num">1</div><p>団子運転は、小さな遅れが増幅するシステム現象。</p></div>
-            <div class="final-item"><div class="num">2</div><p>スプリング法は有望だが、満車・車内客・停留所容量を無視すると逆効果もある。</p></div>
-            <div class="final-item"><div class="num">3</div><p>高需要では、台数・容量・乗降時間短縮などハード面の改善が効きやすい。</p></div>
-            <div class="final-item"><div class="num">4</div><p>バス団子運転は、交通工学・制御・OR・行動科学・環境・現場運用が絡む総合問題。</p></div>
-          </div>
         </div>
-        <div class="image-card" style="background:#ffd91b"><img src="assets/images/dango_bus_3.png" alt="だんごバス3台"></div>
+        <div class="final-list conclusion-list">
+          <div class="final-item"><div class="num">1</div><p>団子運転は、小さな遅れが乗客集中・乗降時間増・さらなる遅れを生む正のフィードバックで増幅する。</p></div>
+          <div class="final-item"><div class="num">2</div><p>制御なし・スキップ制御・スプリング法を同じ条件で比べると、平均待ち時間だけでなく、満車・乗車不可・車間の乱れも見る必要がある。</p></div>
+          <div class="final-item"><div class="num">3</div><p>スプリング法は車間を整える有望な考え方だが、満員車両を保持すると車内客の遅れと後続への副作用を増やす恐れがある。</p></div>
+          <div class="final-item"><div class="num">4</div><p>満員時保持禁止のように容量制約を入れると、高需要時の逆効果を抑えられる。制御は、現場で観測できる条件に合わせて設計する必要がある。</p></div>
+          <div class="final-item"><div class="num">5</div><p>高需要では、運行制御だけでなく台数・容量・乗降時間短縮、混雑情報による分散、REFLEXやEV充電を含む運用制約の統合が重要になる。</p></div>
+        </div>
       </div>
       <div class="slide-no"></div>
       <aside class="notes"><b>締め：</b>軽い入口から入ったが、実はデータ・制御・現場制約・行動科学・環境まで関係する奥深いテーマだった、とまとめる。質問へ。</aside>
