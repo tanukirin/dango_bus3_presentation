@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#273041" flood-opacity=".16"/></filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7fbff"/><stop offset="1" stop-color="#eaf8f1"/></linearGradient>
+  </defs>
+  <rect width="1200" height="620" rx="34" fill="url(#bg)"/>
+  <g font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Yu Gothic', sans-serif">
+    <text x="600" y="62" text-anchor="middle" font-size="36" font-weight="900" fill="#1c2e54">EVバス時代：折返し設計がさらに重要に</text>
+    <text x="600" y="100" text-anchor="middle" font-size="20" font-weight="700" fill="#526079">環境価値を活かすために、運行と充電を一体で設計する</text>
+
+    <g transform="translate(80 150)">
+      <rect width="470" height="320" rx="28" fill="#fff" filter="url(#shadow)"/>
+      <text x="235" y="48" text-anchor="middle" font-size="28" font-weight="900" fill="#1c2e54">従来の折返し余裕</text>
+      <rect x="52" y="102" width="364" height="58" rx="22" fill="#e6f1ff"/>
+      <text x="234" y="139" text-anchor="middle" font-size="22" font-weight="800" fill="#1e50a2">遅延回復</text>
+      <rect x="52" y="182" width="170" height="58" rx="22" fill="#fff0d4"/>
+      <text x="137" y="219" text-anchor="middle" font-size="20" font-weight="800" fill="#8b5a00">運転士休憩</text>
+      <rect x="234" y="182" width="182" height="58" rx="22" fill="#e8f7ed"/>
+      <text x="325" y="219" text-anchor="middle" font-size="20" font-weight="800" fill="#186f50">発車準備</text>
+      <path d="M52 276 H416" stroke="#b8c6da" stroke-width="8" stroke-linecap="round"/>
+      <text x="235" y="302" text-anchor="middle" font-size="18" font-weight="700" fill="#697186">5分・10分の余裕で次便へ戻す</text>
+    </g>
+
+    <g transform="translate(650 150)">
+      <rect width="470" height="320" rx="28" fill="#fff" filter="url(#shadow)"/>
+      <text x="235" y="48" text-anchor="middle" font-size="28" font-weight="900" fill="#1c2e54">これからの折返し設計</text>
+      <rect x="52" y="94" width="162" height="58" rx="22" fill="#e6f1ff"/>
+      <text x="133" y="131" text-anchor="middle" font-size="20" font-weight="800" fill="#1e50a2">遅延回復</text>
+      <rect x="226" y="94" width="190" height="58" rx="22" fill="#fff0d4"/>
+      <text x="321" y="131" text-anchor="middle" font-size="20" font-weight="800" fill="#8b5a00">充電・充電待ち</text>
+      <rect x="52" y="176" width="182" height="58" rx="22" fill="#e8f7ed"/>
+      <text x="143" y="213" text-anchor="middle" font-size="20" font-weight="800" fill="#186f50">充電状態</text>
+      <rect x="246" y="176" width="170" height="58" rx="22" fill="#f0ebff"/>
+      <text x="331" y="213" text-anchor="middle" font-size="20" font-weight="800" fill="#5c46c6">発車時刻</text>
+      <path d="M52 276 H416" stroke="#9ed8bd" stroke-width="8" stroke-linecap="round"/>
+      <text x="235" y="302" text-anchor="middle" font-size="18" font-weight="700" fill="#697186">運行計画と充電計画を同時に整える</text>
+    </g>
+
+    <g transform="translate(180 520)">
+      <rect width="840" height="56" rx="28" fill="#1c2e54"/>
+      <text x="420" y="37" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">未来像：充電を“制約”ではなく、定時性を支える運行設計の一部にする</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,32 @@
+{
+  "title": "だんごバス3台",
+  "version": "v2",
+  "created_for": "15分社内発表 / HTMLスライド",
+  "images_from_thread": [
+    "dango_bus_3.png",
+    "bus_bunching_photo.png",
+    "positive_feedback_loop.png",
+    "demand_wait_no_full_hold_ban.png",
+    "demand_wait_full_hold_ban.png",
+    "capacity_wait.png",
+    "bus_count_wait.png",
+    "dwell_management.png",
+    "multidisciplinary_bus_bunching.png"
+  ],
+  "generated_diagrams": [
+    "field_constraints.svg",
+    "ev_turnaround_constraint.svg"
+  ],
+  "main_file": "index.html",
+  "keyboard": {
+    "next": "ArrowRight / Space",
+    "prev": "ArrowLeft",
+    "notes": "N",
+    "fullscreen": "F"
+  },
+  "recommended_additions": [
+    "実際のシミュレーター画面スクリーンショット",
+    "95%待ち時間・車間RMSE・未完了者数・補正総所要時間グラフ",
+    "満員時保持禁止の平均総所要時間・未完了者数への効果"
+  ]
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#273041" flood-opacity=".15"/></filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fbff"/><stop offset="1" stop-color="#fff6df"/></linearGradient>
+  </defs>
+  <rect width="1200" height="620" rx="34" fill="url(#bg)"/>
+  <g font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Yu Gothic', sans-serif">
+    <text x="600" y="62" text-anchor="middle" font-size="34" font-weight="900" fill="#1c2e54">現場制約を入れると「最適解」が変わる</text>
+    <text x="600" y="100" text-anchor="middle" font-size="19" font-weight="600" fill="#596379">REFLEXの発想：待ち時間を下げるだけでなく、運行上の条件を満たす</text>
+    <g transform="translate(72 146)">
+      <rect width="1060" height="360" rx="30" fill="#fff" filter="url(#shadow)"/>
+      <g font-weight="800" font-size="25" fill="#1c2e54">
+        <text x="50" y="62">運行管理の目的</text><text x="410" y="62">制約条件</text><text x="770" y="62">現場で起きるトレードオフ</text>
+      </g>
+      <g font-weight="700" font-size="20">
+        <rect x="42" y="94" width="280" height="64" rx="18" fill="#e6f1ff"/><text x="64" y="134" fill="#1c2e54">待ち時間・EWTを下げる</text>
+        <rect x="42" y="176" width="280" height="64" rx="18" fill="#e8f7ed"/><text x="64" y="216" fill="#1c2e54">車間を均等にする</text>
+        <rect x="42" y="258" width="280" height="64" rx="18" fill="#fff0d4"/><text x="64" y="298" fill="#1c2e54">乗客体験を安定させる</text>
+        <rect x="388" y="94" width="280" height="64" rx="18" fill="#fff3d2"/><text x="410" y="134" fill="#1c2e54">運転士の休憩・折返し</text>
+        <rect x="388" y="176" width="280" height="64" rx="18" fill="#fde2e2"/><text x="410" y="216" fill="#1c2e54">主要停留所の最低サービス</text>
+        <rect x="388" y="258" width="280" height="64" rx="18" fill="#e6f1ff"/><text x="410" y="298" fill="#1c2e54">回送・車庫・ダイヤ整合</text>
+        <rect x="744" y="94" width="280" height="64" rx="18" fill="#f0ebff"/><text x="766" y="134" fill="#1c2e54">保持しすぎると車内客が損</text>
+        <rect x="744" y="176" width="280" height="64" rx="18" fill="#e8f7ed"/><text x="766" y="216" fill="#1c2e54">スキップしすぎると公平性低下</text>
+        <rect x="744" y="258" width="280" height="64" rx="18" fill="#fff0d4"/><text x="766" y="298" fill="#1c2e54">EV充電で余裕時間が減る</text>
+      </g>
+    </g>
+    <g transform="translate(148 550)"><text font-size="22" font-weight="800" fill="#1c2e54">メッセージ：</text><text x="130" font-size="22" fill="#596379">シミュレーションも「現場の制約を入れてから」が本番</text></g>
+  </g>
+</svg>

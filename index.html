@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>だんごバス3台 — 団子運転のしくみとシミュレーション</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="progress"><span></span></div>
+  <div class="hud" aria-hidden="true">
+    <button data-prev>←</button><button data-next>→</button><button data-notes>Notes</button>
+  </div>
+  <main class="deck">
+
+    <section class="slide cover">
+      <div class="frame">
+        <div class="stack" style="align-content:center;gap:2.4vh">
+          <div class="eyebrow">最近の活動紹介 / 15分発表</div>
+          <h1>だんご<br>バス3台</h1>
+          <p class="subtitle">団子運転を、シミュレーション・現場制約・複数分野の視点から考える</p>
+          <div class="tag-row"><span class="tag">自作HTMLシミュレーター</span><span class="tag">スプリング制御</span><span class="tag">NEC REFLEX</span><span class="tag">EV時代の運行設計</span></div>
+        </div>
+        <div class="image-card" style="background:#ffd91b;box-shadow:0 30px 70px rgba(180,130,0,.20)"><img src="assets/images/dango_bus_3.png" alt="だんごバス3台のイラスト"></div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>導入：</b>だんご3兄弟のパロディとして軽く入る。身近な「バスが3台連続で来る」体験から、シミュレーション、制御、現場制約、EV時代の運行設計まで広げる。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame stack" style="grid-template-rows:auto 1fr">
+        <div>
+          <span class="eyebrow">今日のストーリー</span>
+          <h2 style="margin-top:1.2vh">「3台連続」は、なぜ起きて、どう抑えるのか？</h2>
+        </div>
+        <div class="three-col">
+          <div class="card policy"><span class="badge orange">1</span><h3>身近な現象</h3><p>やっと来たと思ったら、後ろにもバス。まずは団子運転の構造を直感でつかむ。</p></div>
+          <div class="card policy"><span class="badge purple">2</span><h3>シミュレーション</h3><p>制御なし・スキップ制御・スプリング法を比べ、効く条件と失敗条件を見る。</p></div>
+          <div class="card policy"><span class="badge green">3</span><h3>現場制約と発展</h3><p>満車、乗降時間、REFLEX、EV充電、乗客行動まで含めて考える。</p></div>
+        </div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>話すこと：</b>前半は体験に寄せる。中盤で自作シミュレーターと制御の話。後半で「制御だけでは足りない」ことを、現場制約・ハード面・複数分野につなげる。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame two-col wide-right">
+        <div class="stack">
+          <span class="eyebrow">現象</span>
+          <h2>やっと来たと思ったら、<br>後ろにもバス</h2>
+          <p>バスが等間隔で来るはずなのに、前後の間隔が崩れて複数台が固まる。</p>
+          <div class="callout"><p>乗客から見ると「長く待つ時間」と「一気に来る時間」が生まれる。しかも先頭は混み、後続は比較的空くことがある。</p></div>
+        </div>
+        <div class="image-card" style="height:75vh"><img src="assets/images/bus_bunching_photo.png" alt="団子運転のイメージ写真"></div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>説明：</b>添付写真を見せて、現象を一発で共有する。ここでは研究用語よりも「あるある」に寄せる。</aside>
+    </section>
+
+    <section class="slide image-only">
+      <img class="full-image" src="assets/images/positive_feedback_loop.png" alt="バス団子運転の正のフィードバックループ">
+      <aside class="notes"><b>説明：</b>このページは完成図を全面表示。細かく読み上げず、中央の「小さな遅れが拡大する」と、下部の「遅れたバスはさらに遅れ、後続バスはさらに追いつき、団子運転が拡大する」を押さえる。</aside>
+    </section>
+
+    <section class="slide terada">
+      <div class="frame two-col wide-left">
+        <div class="card stack quote-card">
+          <span class="eyebrow">100年前の洞察</span>
+          <h2>寺田寅彦は、<br>すでに「混雑の波」を見ていた</h2>
+          <p>1922年の随筆『電車の混雑について』では、混雑した電車と空いた電車が周期的に現れること、そして乗客がそれを観察して行動を変え得ることが描かれている。</p>
+          <div class="success">これは後半で出てくる「混雑情報を見て、乗客が自発的に分散する」という発想の伏線になる。</div>
+        </div>
+        <div class="card stack">
+          <h3>今回のテーマとのつながり</h3>
+          <div class="final-list">
+            <div class="final-item"><div class="num">1</div><p>混雑はランダムではなく、波として現れることがある。</p></div>
+            <div class="final-item"><div class="num">2</div><p>人の行動は、混雑の波を強めることも弱めることもある。</p></div>
+            <div class="final-item"><div class="num">3</div><p>だから団子運転は、車両だけでなく乗客も含むシステム問題として見る必要がある。</p></div>
+          </div>
+          <p class="source-inline">出典：寺田寅彦『電車の混雑について』初出「思想」1922年9月。</p>
+        </div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>話すこと：</b>寺田寅彦を入れることで、単なる最新技術話ではなく「昔から鋭く観察されていた現象を、現代のデータとシミュレーションで扱う」という厚みを出す。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame stack" style="grid-template-rows:auto auto 1fr">
+        <div>
+          <span class="eyebrow">今回やったこと</span>
+          <h2 style="margin-top:1vh">自作シミュレーターで、団子運転を再現する</h2>
+        </div>
+        <p class="subtitle">ブラウザ上で動くHTML/JavaScriptシミュレーターを作り、条件を変えながら制御の効き方を比較した。</p>
+        <div class="kpi-grid four">
+          <div class="kpi"><b>路線</b><span>同一路線を複数バスが走る</span></div>
+          <div class="kpi"><b>乗客</b><span>停留所ごとに発生・乗降</span></div>
+          <div class="kpi"><b>制約</b><span>満車・停留所・ランダム遅延</span></div>
+          <div class="kpi"><b>比較</b><span>制御なし / スキップ / スプリング</span></div>
+        </div>
+        <div class="card">
+          <h3>実演で見せるポイント</h3>
+          <p>バス同士の間隔、待ち時間、混雑率、満車、スキップ、保持時間がどう変化するかを、画面で見せる。</p>
+        </div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>補足：</b>ここでは路線の模式図は出さず、何をモデル化したかを文字とKPIカードで説明する。必要なら実際のシミュレーター画面を別途スクショで差し替える。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame stack" style="grid-template-rows:auto 1fr">
+        <div>
+          <span class="eyebrow">比較対象</span>
+          <h2 style="margin-top:1vh">3つの運行方式を比べる</h2>
+        </div>
+        <div class="three-col">
+          <div class="card policy"><span class="badge red">制御なし</span><h3>普通に走る</h3><p>乱れが入ると、団子化の正のフィードバックがそのまま進む。</p><div class="tag-row"><span class="tag">基準</span><span class="tag">介入なし</span></div></div>
+          <div class="card policy"><span class="badge green">スキップ制御</span><h3>後続に任せる</h3><p>後続が近いとき、先行バスが一部の乗車扱いを抑え、遅れ回復を狙う。</p><div class="tag-row"><span class="tag">先行を逃がす</span><span class="tag">公平性に注意</span></div></div>
+          <div class="card policy"><span class="badge purple">スプリング法</span><h3>車間を整える</h3><p>バス間を仮想バネでつなぐ発想。前後の間隔を見て保持を判断する。</p><div class="tag-row"><span class="tag">車間均等化</span><span class="tag">高需要に注意</span></div></div>
+        </div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>話すこと：</b>スキップは「乗せない」ではなく「後続に任せる」。スプリング法は車間均等化の考え方。ただし次のスライドで「それだけでは不十分」と展開する。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame stack" style="grid-template-rows:auto 1fr auto">
+        <div>
+          <span class="eyebrow">ドラマ部分</span>
+          <h2 style="margin-top:1vh">スプリング法は有望。でも、ある条件で逆効果が見えた</h2>
+        </div>
+        <div class="timeline drama-timeline">
+          <div class="step"><b>① 発見</b><p>シミュレーションで、高需要時にスプリング制御が思ったほど効かない、または悪化するケースを確認。</p></div>
+          <div class="step"><b>② 原因検討</b><p>AIと一緒に原因を分解。車間だけを見て満車バスを保持すると、車内客と後続に副作用が出るのでは？と仮説化。</p></div>
+          <div class="step"><b>③ 論文発見</b><p>車両容量を考慮したリアルタイム保持制御の研究にたどり着く。問題意識が先行研究とつながった。</p></div>
+          <div class="step"><b>④ 検証・克服</b><p>満員時の保持禁止を入れて再実験。高需要時の逆効果を抑えられる方向が見えた。</p></div>
+        </div>
+        <div class="callout"><p>ポイント：制御ロジックは「車間」だけでなく、「そのバスを今止める意味があるか」まで見ないと危ない。</p></div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>話すこと：</b>ここはドラマチックに。「きれいな理論で解けた」ではなく、失敗を発見し、原因を考え、論文で裏づけ、実装で克服した流れを伝える。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame stack" style="grid-template-rows:auto 1fr auto">
+        <div>
+          <span class="eyebrow">シミュレーション結果</span>
+          <h2 style="margin-top:1vh">満員時の保持禁止：なし / あり</h2>
+        </div>
+        <div class="two-col" style="align-items:stretch">
+          <div class="card tight stack">
+            <h3>保持禁止なし</h3>
+            <div class="image-card" style="height:54vh;box-shadow:none;border:1px solid #e6ebf4"><img src="assets/images/demand_wait_no_full_hold_ban.png" alt="満員時保持禁止なしの需要倍率別平均待ち時間"></div>
+            <p class="small">高需要側で、保持の副作用が出やすい。</p>
+          </div>
+          <div class="card tight stack">
+            <h3>保持禁止あり</h3>
+            <div class="image-card" style="height:54vh;box-shadow:none;border:1px solid #e6ebf4"><img src="assets/images/demand_wait_full_hold_ban.png" alt="満員時保持禁止ありの需要倍率別平均待ち時間"></div>
+            <p class="small">満車に近いバスを無理に止めないことで、副作用を抑える。</p>
+          </div>
+        </div>
+        <div class="success"><p>学び：同じスプリング法でも、容量制約を入れるだけで振る舞いが変わる。現実の制約を入れた制御設計が重要。</p></div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>補足：</b>平均待ち時間グラフとして見せるが、細かい指標論は実演で扱う。ここでは「制約を入れるとロジックが改善する」というストーリーを重視する。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame stack" style="grid-template-rows:auto 1fr auto">
+        <div>
+          <span class="eyebrow">ハード面の示唆 1</span>
+          <h2 style="margin-top:1vh">高需要では、台数・容量の増加が効きやすい</h2>
+        </div>
+        <div class="two-col" style="align-items:stretch">
+          <div class="card tight stack">
+            <h3>バス定員を増やす</h3>
+            <div class="image-card" style="height:54vh;box-shadow:none;border:1px solid #e6ebf4"><img src="assets/images/capacity_wait.png" alt="バス定員を変化させたときの平均待ち時間"></div>
+          </div>
+          <div class="card tight stack">
+            <h3>バス台数を増やす</h3>
+            <div class="image-card" style="height:54vh;box-shadow:none;border:1px solid #e6ebf4"><img src="assets/images/bus_count_wait.png" alt="バス台数を変化させたときの平均待ち時間"></div>
+          </div>
+        </div>
+        <div class="callout"><p>運行管理だけに注目すると、供給不足そのものを見落とす。容量・台数が足りない条件では、物理的な供給増が強く効く。</p></div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>話すこと：</b>スプリング制御は魔法ではない。需要が高すぎると、制御ではなく供給量不足が本質になる。シミュレーションはそれを見抜く道具にもなる。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame two-col wide-left">
+        <div class="image-card" style="height:74vh"><img src="assets/images/dwell_management.png" alt="需要倍率別：乗降時間か、運行管理か"></div>
+        <div class="stack">
+          <span class="eyebrow">ハード面の示唆 2</span>
+          <h2>乗降時間の短縮は<br>強力な打ち手</h2>
+          <p>橙は「乗降4秒→2秒」の改善幅、青は「スプリング制御による改善幅」。</p>
+          <div class="success">高需要になるほど、乗降口の工夫・決済改善・車内動線改善など、乗降処理能力の改善が前に出やすい。</div>
+          <p class="small">例：多扉化、乗降分離、タッチ決済の詰まり低減、停留所での整列・案内など。</p>
+        </div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>話すこと：</b>「ソフト面だけでは良くない」という主張の根拠スライド。高需要時は乗降時間が律速になり、運行管理より乗降処理能力の改善が効くケースがある。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame two-col wide-right">
+        <div class="stack">
+          <span class="eyebrow">行動科学</span>
+          <h2>乗客の行動も<br>制御の一部になる</h2>
+          <p>今来たバスが混んでいて、後続が近くて空いているとわかれば、一部の乗客は自発的に次を待つかもしれない。</p>
+          <div class="quote">混雑情報は、乗客を「待たされる人」から、混雑を分散する参加者に変える。</div>
+          <p class="small">寺田寅彦が見た「混雑の波」と、現代のリアルタイム混雑情報はここでつながる。</p>
+        </div>
+        <div class="card stack">
+          <h3>実装イメージ</h3>
+          <table class="mini-table">
+            <tr><th>条件</th><th>乗客の選択</th></tr>
+            <tr><td>先行バスが混雑</td><td>快適性重視の人は次便を選ぶ</td></tr>
+            <tr><td>後続が1停留所以内</td><td>見送り抵抗が下がる</td></tr>
+            <tr><td>混雑差が大きい</td><td>乗客が自然に分散する</td></tr>
+          </table>
+          <div class="warn">強制ではなく、情報提示による自発的な分散がポイント。</div>
+        </div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>話すこと：</b>以前検討した「後続1停以内、混雑率差15%以上なら見送り確率」などのロジックにつなげる。発表では細かい式より考え方を伝える。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame two-col wide-left">
+        <div class="image-card" style="height:74vh"><img src="assets/svg/field_constraints.svg" alt="現場制約の図"></div>
+        <div class="stack">
+          <span class="eyebrow">現場制約</span>
+          <h2>NEC REFLEXが<br>示す視点</h2>
+          <p>REFLEXは、バスの数珠つなぎ現象を軽減するために、停留所での保持や停車義務免除などを含む動的な調整を考える。</p>
+          <ul>
+            <li>便間隔・乗り継ぎ間隔などの運行条件</li>
+            <li>保持時間、折返し、運転士休憩</li>
+            <li>現場制約を満たす範囲での最適化</li>
+          </ul>
+          <div class="success">つまり「理論上きれいな制御」ではなく「現場で実行できる制御」が重要。</div>
+        </div>
+      </div>
+      <p class="source">参考：NEC Tech Report「REFLEXによるバス運行の動的最適化」。</p>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>話すこと：</b>現場制約を入れることで最適解が変わる。運転士休憩、回送、ダイヤ整合、主要停留所非スキップも触れる。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame two-col wide-left">
+        <div class="image-card" style="height:74vh"><img src="assets/svg/ev_turnaround_constraint.svg" alt="EVバス時代の折返し設計"></div>
+        <div class="stack">
+          <span class="eyebrow">新しい制約を前向きに扱う</span>
+          <h2>EVバス時代は、<br>折返し設計がもっと重要になる</h2>
+          <p>国土交通省の電動バス導入ガイドラインでは、導入主体・路線・運行形態ごとに、必要な車両性能や充電設備が異なるとされている。</p>
+          <div class="success">少し先の未来では、ダイヤ作成は「走る時間」だけでなく、充電場所・充電時間・充電待ち・車両ごとの充電状態まで含めた設計になる。</div>
+          <p class="small">EV化は環境面で重要な前進。だからこそ、遅延回復余裕と充電余裕を競合させない運行設計が価値を持つ。</p>
+        </div>
+      </div>
+      <p class="source">参考：国土交通省「電動バス導入ガイドライン」。</p>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>話すこと：</b>EVに否定的な印象を与えない。環境面で必要な前進だが、運行設計の変数が増える。REFLEX的に、運行制御と充電計画を一体で扱う時代になる、という前向きな話にする。</aside>
+    </section>
+
+    <section class="slide image-only white">
+      <img class="full-image" src="assets/images/multidisciplinary_bus_bunching.png" alt="バス団子運転を複数分野から見る図">
+      <aside class="notes"><b>説明：</b>終盤のまとめ図。交通工学・制御工学・OR・データサイエンス・経済学・行動科学・都市計画・公共政策・環境工学・人的要因・公平性・情報システムが相互に関係することを見せる。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame two-col wide-right">
+        <div class="stack">
+          <span class="eyebrow">結論</span>
+          <h2>今回の探求から<br>見えたこと</h2>
+          <div class="final-list">
+            <div class="final-item"><div class="num">1</div><p>団子運転は、小さな遅れが増幅するシステム現象。</p></div>
+            <div class="final-item"><div class="num">2</div><p>スプリング法は有望だが、満車・車内客・停留所容量を無視すると逆効果もある。</p></div>
+            <div class="final-item"><div class="num">3</div><p>高需要では、台数・容量・乗降時間短縮などハード面の改善が効きやすい。</p></div>
+            <div class="final-item"><div class="num">4</div><p>バス団子運転は、交通工学・制御・OR・行動科学・環境・現場運用が絡む総合問題。</p></div>
+          </div>
+        </div>
+        <div class="image-card" style="background:#ffd91b"><img src="assets/images/dango_bus_3.png" alt="だんごバス3台"></div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>締め：</b>軽い入口から入ったが、実はデータ・制御・現場制約・行動科学・環境まで関係する奥深いテーマだった、とまとめる。質問へ。</aside>
+    </section>
+
+    <section class="slide">
+      <div class="frame stack" style="grid-template-rows:auto 1fr">
+        <div>
+          <span class="eyebrow">参考情報</span>
+          <h2 style="margin-top:1vh">発表で触れた主な資料</h2>
+        </div>
+        <div class="card" style="overflow:auto">
+          <ul>
+            <li>寺田寅彦『電車の混雑について』青空文庫。初出「思想」1922年9月。</li>
+            <li>NEC Tech Report「REFLEXによるバス運行の動的最適化」。</li>
+            <li>Gkiotsalitis, K., & Van Berkum, E. C. “An analytic solution for real-time bus holding subject to vehicle capacity limits.” Transportation Research Part C.</li>
+            <li>国土交通省「電動バス導入ガイドライン」。</li>
+            <li>リアルタイム混雑情報、バス保持制御、EVバス充電計画に関する交通研究。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-no"></div>
+      <aside class="notes"><b>補足：</b>必要に応じて質疑で使う。画面に表示しても違和感がないよう、不要な注釈は削除している。</aside>
+    </section>
+
+  </main>
+  <div class="notes-panel"></div>
+  <script src="assets/js/deck.js"></script>
+</body>
+</html>
