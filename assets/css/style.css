@@ -80,7 +80,7 @@ ul{margin:.4em 0 0 1.2em;padding:0}.small{font-size:clamp(14px,1.05vw,18px);colo
 .terada .final-item p{font-size:clamp(17px,1.22vw,23px);}
 .conclusion .frame{gap:1.1vh;}
 .conclusion h2{font-size:clamp(32px,3vw,50px);}
-.conclusion-list{grid-template-columns:1fr;gap:.75vh;align-content:space-between;height:100%;}
+.conclusion-list{grid-template-columns:1fr;gap:.75vh;align-content:space-between;height:78%;}
 .conclusion-list .final-item{padding:.72em 1em;border-radius:18px;gap:.9em;min-height:0;align-items:start;}
 .conclusion-list .conclusion-primary{grid-column:auto;}
 .conclusion-list .final-item .num{width:1.9em;height:1.9em;font-size:1em;flex:none;}

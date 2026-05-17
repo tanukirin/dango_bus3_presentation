@@ -23,22 +23,6 @@
     </section>
 
     <section class="slide">
-      <div class="frame stack" style="grid-template-rows:auto 1fr">
-        <div>
-          <span class="eyebrow">今日のストーリー</span>
-          <h2 style="margin-top:1.2vh">「3台連続」は、なぜ起きて、どう抑えるのか？</h2>
-        </div>
-        <div class="three-col">
-          <div class="card policy"><span class="badge orange">1</span><h3>身近な現象</h3><p>やっと来たと思ったら、後ろにもバス。まずは団子運転の構造を直感でつかむ。</p></div>
-          <div class="card policy"><span class="badge purple">2</span><h3>シミュレーション</h3><p>制御なし・スキップ制御・スプリング法を比べ、効く条件と失敗条件を見る。</p></div>
-          <div class="card policy"><span class="badge green">3</span><h3>現場制約と発展</h3><p>満車、乗降時間、REFLEX、EV充電、乗客行動まで含めて考える。</p></div>
-        </div>
-      </div>
-      <div class="slide-no"></div>
-      <aside class="notes"><b>話すこと：</b>前半は体験に寄せる。中盤で自作シミュレーターと制御の話。後半で「制御だけでは足りない」ことを、現場制約・ハード面・複数分野につなげる。</aside>
-    </section>
-
-    <section class="slide">
       <div class="frame two-col wide-right">
         <div class="stack">
           <span class="eyebrow">現象</span>
@@ -119,6 +103,11 @@
       </div>
       <div class="slide-no"></div>
       <aside class="notes"><b>話すこと：</b>スキップは「乗せない」ではなく「後続に任せる」。スプリング法は車間均等化の考え方。ただし次のスライドで「それだけでは不十分」と展開する。</aside>
+    </section>
+
+    <section class="slide image-only white">
+      <img class="full-image" src="assets/images/skip_spring_control.png" alt="スキップ制御とスプリング制御の直感的イメージ">
+      <aside class="notes"><b>説明：</b>スキップ制御は局所的に負担を分散し、スプリング制御は前後の車間バランスを見て全体を整える、という違いを図で押さえる。</aside>
     </section>
 
     <section class="slide spring-discovery">
