@@ -67,28 +67,11 @@
       <aside class="notes"><b>話すこと：</b>ここでは「100年前に団子運転に相当する現象を見ていた物理学者がいた」という小話として軽く触れる。寺田は、混雑車両に乗客が集中する行動をかなり批判的に見ていた点、そしてその行動が停車時間を伸ばし団子化を育てる点を添える。テーマとのつながりは、後半の乗客行動のスライドで改めて回収する。</aside>
     </section>
 
-    <section class="slide">
-      <div class="frame stack" style="grid-template-rows:auto auto 1fr">
-        <div>
-          <span class="eyebrow">今回やったこと</span>
-          <h2 style="margin-top:1vh">自作シミュレーターで、団子運転を再現する</h2>
-        </div>
-        <p class="subtitle">ブラウザ上で動くHTML/JavaScriptシミュレーターを作り、条件を変えながら制御の効き方を比較した。</p>
-        <div class="kpi-grid four">
-          <div class="kpi"><b>路線</b><span>同一路線を複数バスが走る</span></div>
-          <div class="kpi"><b>乗客</b><span>停留所ごとに発生・乗降</span></div>
-          <div class="kpi"><b>制約</b><span>満車・停留所・ランダム遅延</span></div>
-          <div class="kpi"><b>比較</b><span>制御なし / スキップ / スプリング</span></div>
-        </div>
-        <div class="card">
-          <h3>実演で見せるポイント</h3>
-          <p>バス同士の間隔、待ち時間、混雑率、満車、スキップ、保持時間がどう変化するかを、画面で見せる。</p>
-        </div>
-      </div>
-      <div class="slide-no"></div>
-      <aside class="notes"><b>補足：</b>ここでは路線の模式図は出さず、何をモデル化したかを文字とKPIカードで説明する。必要なら実際のシミュレーター画面を別途スクショで差し替える。</aside>
+    <section class="slide image-only white">
+      <img class="full-image" src="assets/images/skip_spring_control.png" alt="スキップ制御とスプリング制御の直感的イメージ">
+      <aside class="notes"><b>説明：</b>スキップ制御は局所的に負担を分散し、スプリング制御は前後の車間バランスを見て全体を整える、という違いを図で押さえる。</aside>
     </section>
-
+    
     <section class="slide">
       <div class="frame stack" style="grid-template-rows:auto 1fr">
         <div>
@@ -103,11 +86,6 @@
       </div>
       <div class="slide-no"></div>
       <aside class="notes"><b>話すこと：</b>スキップは「乗せない」ではなく「後続に任せる」。スプリング法は車間均等化の考え方。ただし次のスライドで「それだけでは不十分」と展開する。</aside>
-    </section>
-
-    <section class="slide image-only white">
-      <img class="full-image" src="assets/images/skip_spring_control.png" alt="スキップ制御とスプリング制御の直感的イメージ">
-      <aside class="notes"><b>説明：</b>スキップ制御は局所的に負担を分散し、スプリング制御は前後の車間バランスを見て全体を整える、という違いを図で押さえる。</aside>
     </section>
 
     <section class="slide spring-discovery">
